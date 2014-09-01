@@ -18,6 +18,7 @@ def emotion(request):
         sentiments = ans[0]
         ana = ans[1]
         topics = ans[2]
+        
         return render(request,'emotion.html',{'tweetlist':tweetlist,'q':q,'sentiments':sentiments,'ana':ana,'topics':topics})
 
      else:

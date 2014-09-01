@@ -23,22 +23,26 @@ def ravikirajprocessing(tweet_text):
         #Convert @username to AT_USER
         tweet_text = re.sub('@[^\s]+','AT_USER',tweet_text)
         
+      
         puncs = ['!',',','(',')','?','.','_','/',';',':','&','-','~','`','|',"'",'"','+','=','[',']','<','>','*','^','$']
         
         news = ""
         for c in tweet_text:
              if c in puncs:
                pass
+             elif c=='.':
+               pass
              else:
                news = news + c
-        tweet_text = news                    
+        tweet_text = news
+                    
+        tweet_text.replace("."," ")
 
-        
         #Remove additional white spaces
         tweet_text = re.sub('[\s]+', ' ', tweet_text)
         #Replace #word with word
         tweet_text = re.sub(r'#([^\s]+)', r'\1', tweet_text)
-        tweet_text = re.sub(r'([^\s]*)([.])+([^\s]*)', r'\1', tweet_text)
+       
         #trim
         tweet_text = tweet_text.strip('\'"')
         return tweet_text

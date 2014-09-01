@@ -14,7 +14,7 @@ def fetch(q):
       api = tweepy.API(auth)
 
 
-      raw_tweets = api.search(q)
+      raw_tweets = api.search(q,count=100)
 
       tweetlist = []
       all_objects = TweetObject.objects.all()

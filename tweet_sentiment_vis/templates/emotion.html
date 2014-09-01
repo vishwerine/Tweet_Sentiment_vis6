@@ -22,7 +22,7 @@
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form" action="/emotion" method="get">
             <div class="form-group">
-              <input type="text" placeholder="{{ q }}" class="form-control" name="q">
+              <input type="text" placeholder="{{q}}" class="form-control" name="q">
             </div>
              <button type="submit" class="btn btn-primary">Update</button>
           </form>
@@ -40,7 +40,7 @@
         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
           <li><a href="#dropdown3" tabindex="-1" data-toggle="tab"> Raw Tweets </a></li>
           <li><a href="#dropdown4" tabindex="-1" data-toggle="tab"> Sentiment Table </a></li>
-          <li><a href="#dropdown5" tabindex="-1" data-toggle="tab"> Topic tag cloud </a></li>
+          <li><a href="#dropdown5" tabindex="-1" data-toggle="tab"> Topics List </a></li>
          
         </ul>
       </li>
@@ -50,6 +50,9 @@
       <div class="tab-pane fade in active" id="home">
         
 <!-- Beginning of Tweets -->
+<br>
+<br>
+<br>
 
    <div class="tweets">
 
@@ -168,6 +171,19 @@
 <!-- Beginning of Sentiments -->
 
 
+<table class="table table-bordered table-striped">
+
+<tr>
+<td>
+<h2>  <span class="label label-success"> Positive </span> {{ ana | posinegi:"up" }} <span class="glyphicon glyphicon-thumbs-up"> </span> </h2>
+</td>
+
+<td>
+ <h2> <span class="label label-danger"> Negative </span>{{ ana | posinegi:"down" }} <span class="glyphicon glyphicon-thumbs-down"> </span> </h2>
+</td>
+</table>
+
+
 <img src="{% static 'images/piechart.png' %}"> </img>
 
 
@@ -184,29 +200,9 @@
         <p>
 <!-- Beginning of Topics -->
 
-{% for t in topics %}
 
-{% if t.resul == '1' %}
+<img src="{% static 'images/tagcloud.png' %}">  </img>
 
-<h1> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h1>
-{% elif t.resul == '2' %}
-<h2> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h2>
-
-{% elif t.resul == '3' %}
-<h3> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h3>
-
-{% elif t.resul == '4' %}
-<h4> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h4>
-
-{% elif t.resul == '5' %}
-<h5> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h5>
-
-{% endif %}
-
- 
-
-
-{% endfor %}
 
 
 <!--   End of Topics  -->      
@@ -290,8 +286,29 @@
       <div class="tab-pane fade" id="dropdown5">
         <p>
 <!-- place for processed tag cloud -->
+{% for t in topics %}
 
-<img src="{% static 'images/tagcloud.png' %}">  </img>
+{% if t.resul == '1' %}
+
+<h1> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h1>
+{% elif t.resul == '2' %}
+<h2> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h2>
+
+{% elif t.resul == '3' %}
+<h3> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h3>
+
+{% elif t.resul == '4' %}
+<h4> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h4>
+
+{% elif t.resul == '5' %}
+<h5> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h5>
+
+{% endif %}
+
+ 
+
+
+{% endfor %}
 
 <!-- end -->
         </p>
