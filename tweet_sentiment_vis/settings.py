@@ -92,3 +92,4 @@ STATIC_DIRS =  (
            os.path.join(BASE_DIR,"sentimentvis/static"),
                )
 
+

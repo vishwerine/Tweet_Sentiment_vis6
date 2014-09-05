@@ -7,6 +7,8 @@ from tweet_sentiment_vis.models import TweetObject
 import tweepy
 import datetime
 
+import pytz
+
 def fetch(q):
       ''' fetches relevant tweets using tweepy '''
       auth = tweepy.OAuthHandler('Ohqs1xx5t6XOfm1Fm7qHeVfz2','zLWvNpBLPIbPhSyawX8PuN9wDkB8OEv1fLt8IlOmib7ZqwPkiQ')
@@ -26,7 +28,7 @@ def fetch(q):
                     new_tweet.text = raw_tweet.text
                     new_tweet.user = raw_tweet.user.name 
                     new_tweet.date = raw_tweet.created_at
-                    
+                    new_tweet.date = pytz.utc.localize(new_tweet.date)
                     new_tweet.save()
                     tweetlist.append(new_tweet)
 

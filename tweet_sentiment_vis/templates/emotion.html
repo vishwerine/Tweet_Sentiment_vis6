@@ -34,7 +34,7 @@
     <ul id="myTab" class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab"> Tweets </a></li>
       <li><a href="#profile" data-toggle="tab"> Sentiments </a></li>
-     <li><a href="#topics" data-toggle="tab"> Topics </a></li>
+     <li><a href="#topics" data-toggle="tab"> Topic Tag Cloud </a></li>
       <li class="dropdown">
         <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"> Analysis <b class="caret"></b></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
@@ -199,31 +199,9 @@
       <div class="tab-pane fade" id="topics">
         <p>
 <!-- Beginning of Topics -->
-{% for t in topics %}
-
-{% if t.resul == '1' %}
-
-<h1> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h1>
-{% elif t.resul == '2' %}
-<h2> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h2>
-
-{% elif t.resul == '3' %}
-<h3> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h3>
-
-{% elif t.resul == '4' %}
-<h4> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h4>
-
-{% elif t.resul == '5' %}
-<h5> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h5>
-
-{% endif %}
-
- 
 
 
-{% endfor %}
-
-
+<img src="{% static 'images/tagcloud.png' %}">  </img>
 
 
 <!--   End of Topics  -->      
@@ -309,7 +287,30 @@
 <!-- place for processed tag cloud -->
 
 
-<img src="{% static 'images/tagcloud.png' %}">  </img>
+{% for t in topics %}
+
+{% if t.resul == '1' %}
+
+<h1> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h1>
+{% elif t.resul == '2' %}
+<h2> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h2>
+
+{% elif t.resul == '3' %}
+<h3> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h3>
+
+{% elif t.resul == '4' %}
+<h4> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h4>
+
+{% elif t.resul == '5' %}
+<h5> {{ t.topic }} <span class="label label-default"> {{ t.freq }} </span> </h5>
+
+{% endif %}
+
+ 
+
+
+{% endfor %}
+
 
 
 <!-- end -->

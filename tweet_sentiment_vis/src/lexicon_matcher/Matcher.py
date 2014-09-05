@@ -4,13 +4,11 @@
 
 from TweetPreProcessor import get_tweets
 
-from pytagcloud import make_tags, create_tag_image
+from pytagcloud import make_tags, create_tag_image 
 from pytagcloud.lang.counter import get_tag_counts
 
 
 from pylab import *
-
-import os
 
 
 
@@ -69,7 +67,10 @@ def remove_repeated_tags(Tweets):
 
 def analyze(Tweets):
       ''' input tweets and it will give you analysis at macro level '''
-      os.remove('tweet_sentiment_vis/static/images/piechart.png')
+      if os.path.isfile('tweet_sentiment_vis/static/images/piechart.png'):
+         os.remove('tweet_sentiment_vis/static/images/piechart.png')
+     
+     
       liss = []
       
       for i in range(10):
@@ -178,14 +179,14 @@ def get_string(topics):
         s =""
         for t in topics:
           for i in range(t.freq):
-            if t.resul=='1' and t.resul=='2':
+            if t.resul=='1' or t.resul=='2':
              if t.topic not in avoidlist:
               (t.topic).replace(".","")
               t.topic = re.sub('[\s]+', ' ', t.topic)
               s = s + t.topic + " "
         return s
 
-
+import os
 
 def match():
      ''' returns labeled tweets '''
@@ -201,13 +202,14 @@ def match():
   
      remove_repeated_tags(Tweets)
 
-     s = get_string(topics)
+     s = get_string(topics[2:])
 
      tags = make_tags(get_tag_counts(s))
-
-    
-     create_tag_image(tags,'tweet_sentiment_vis/static/images/tagcloud.png',size=(1000,500))     
-
+     if os.path.isfile('tweet_sentiment_vis/static/images/tagcloud.png'):
+         os.remove('tweet_sentiment_vis/static/images/tagcloud.png')
+     #print "creating image"
+     create_tag_image(tags,'tweet_sentiment_vis/static/images/tagcloud.png',size=(500,500))     
+     #print "image created"
 
      return [Tweets,ana,topics]
 
